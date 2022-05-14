@@ -10,20 +10,8 @@ __2.__ Para los estilos pueden usar la librería que quieran: Tailwind, Bootstra
 
 __3.__ No es necesario que hagan los componentes de Login y SignUp. No tiene sentido hacerlos en este punto porque aún no vimos Vue Router.
 
-__4.__ Para mostrar la información de productos pueden crear un componente que use [cards](https://getbootstrap.com/docs/4.0/components/card/) de Bootstrap. Recuerden agregar un par de clases de CSS para el tamaño de la card:
+__4.__ Para mostrar la información de productos pueden crear un componente que use [cards](https://getbootstrap.com/docs/4.0/components/card/) de Bootstrap (ProductCard.vue). Recuerden agregar un par de clases de CSS para el tamaño de la card.
 
-```css
-.card-size {
-  width: 14rem;
-  height: 27rem;
-}
-
-.card-image {
-  width: 14rem;
-  height: 14rem;
-  object-fit: cover;
-}
-```
 Luego, en el componente padre (App.vue) pueden iterar sobre el array de productos con un `v-for`:
 
 ```html
