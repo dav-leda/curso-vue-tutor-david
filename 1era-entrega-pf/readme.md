@@ -159,12 +159,12 @@ updateCart(productId) {
     this.cart.push({
       ...newProduct,
       quantity: 1, 
-      total: addedProduct.price
+      total: newProduct.price
     })
   }
 } 
 ```
-__9.__ Para modificar la cantidad de productos pueden crear un componente contador (como el que vimos en la primera entrega) que esté dentro del componente ProductCard. No es obligatorio hacerlo así, pero queda más claro para el usuario poder ver cuántos productos ya tiene agregados:
+__9.__ Para modificar la cantidad de productos pueden crear un componente contador (como el que hicimos en la primera entrega) que esté dentro del componente ProductCard. No es obligatorio hacerlo así, pero queda más claro para el usuario poder ver cuántos productos ya tiene agregados:
 
 ![vue-app](./images/vue-bakery.png)
 
