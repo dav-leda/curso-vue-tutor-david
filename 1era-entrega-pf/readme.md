@@ -56,7 +56,7 @@ Luego pueden crear un componente para la modal, y dentro de éste un componente 
 </template>
 ```
 
-__6.__ La consigna dice que los datos de productos pueden estar en un archivo JSON o dentro de los componentes. Les recomiendo que no la pongan dentro del componente de productos (ProductCard.vue) sino en el componente padre (App.vue) ya que esa información puede ser requerida por otros componentes (por ejemplo, el del carrito) por lo que es mejor centralizar toda la información en el padre.
+__6.__ La consigna dice que los datos de productos pueden estar en un archivo JSON o dentro de los componentes. Les recomiendo que no los pongan dentro del componente de productos (ProductCard.vue) sino en el componente padre (App.vue) ya que esa información puede ser requerida por otros componentes (por ejemplo, el del carrito) por lo que es mejor centralizar toda la información en el padre.
 
 Si pueden, sería mejor que usen un archivo JSON en lugar de tener toda la información de productos hardcodeada en el objetdo `data` para que el `<script>` de App.vue no les quede tan largo, y también para simular una llamada a una API, que es la forma más usual en que se obtiene este tipo de información en una app de Vue. Para simular la llamada a la API pueden usar una librería de llamadas HTTP como [Axios](https://www.npmjs.com/package/axios). Para usarla primero deben instalarla (`npm i axios`) y luego importarla en el `<script>` de App.vue:
 
