@@ -176,7 +176,7 @@ export default {
 
   computed: {
     cartCounter () {
-      return this.cart.reduce((acc, product) => acc + product.qty, 0)
+      return this.cart.reduce((acc, product) => acc + product.quantity, 0)
     }
   }
 }
