@@ -141,8 +141,9 @@ updateCart(productId) {
   } else {
     // Si el producto no esta en el carrito, lo agrego.  
     // Para no mutar propiedades del array de productos original
-    // busco el producto y lo guardo en un nuevo objeto
-    const newProduct = this.products.find(product => product.id === productId);
+    // busco el producto y lo guardo en un nuevo objeto:
+    const findProduct = this.products.find(product => product.id === productId);
+    const newProduct = { ...findProduct };
   
     this.cart.push({
       ...newProduct,
