@@ -46,7 +46,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-Luego pueden crear un componente para la modal, y dentro de éste un componente hijo para la tabla de productos. Para la tabla pueden reutilizar el componente que hicimos en la entrega anterior (TableComponent.vue). Y a la tabla le pasan como `prop` el array de productos en el carrito (`cart`). Recuerden primero pasar el array del carrito como `prop` desde el componente padre (App.vue) al componente de la modal (CartModal.vue) ya que las `props` no se pueden pasar de abuelo a nieto, solo de padre a hijo:
+Luego pueden crear un componente para la modal, y dentro de éste un componente hijo para la tabla de productos. Para la tabla pueden reutilizar el componente que hicimos en la entrega anterior (TableComponent.vue). Y a la tabla le pasan como `prop` el array de productos en el carrito (`cart`). Recuerden primero pasar el array del carrito como `prop` desde el componente padre (App.vue) al componente de la modal (CartModal.vue) ya que las `props` no se pueden pasar de abuelo a nieto (excepto al utilizar el patrón [provide/inject](https://vuejs.org/guide/components/provide-inject.html#app-level-provide) que vamos a ver más adelante) solo de padre a hijo:
 
 ```html
 <template>
@@ -153,11 +153,58 @@ updateCart(productId) {
   }
 } 
 ```
-__9.__ Para modificar la cantidad de productos pueden crear un componente contador (como el que hicimos en la primera entrega) que esté dentro del componente ProductCard. No es obligatorio hacerlo así, pero queda más claro para el usuario poder ver cuántos productos ya tiene agregados:
+
+__9.__ Para mostrar la cantidad total de productos en el carrito en la NavBar (el número de arriba a la derecha) puede usar una computed property que calcule el total en base al array del carrito que le llega a la NavBar mediante una prop:
+
+```js
+export default {
+  name: 'NavBar',
+  
+  components: {
+    CartModal
+  },
+  
+  props: {
+    cart: {
+      type: Array,
+    }
+  },
+  
+  data: () => ({
+    showModal: false
+  }),
+
+  computed: {
+    cartCounter () {
+      return this.cart.reduce((acc, product) => acc + product.qty, 0)
+    }
+  }
+}
+```
+Yo usé `reduce` para calcular el total incluyendo el subtotal de cada producto (o sea, cuántas veces se repite el mismo producto). Pero si quieren pueden calcular solamente la cantidad de productos individuales con `cart.length`:
+
+```js
+  computed: {
+    cartCounter () {
+      return this.cart.length
+    }
+  }
+```
+Y pueden mostrar el resultado en el `<template>` de la NavBar dentro de un botón que al ser cliqueado muestre la modal con la tabla del carrito:
+
+```html
+<div class="navbar-nav">
+  <button class="btn btn-danger" @click="showModal = true">
+    <span>{{ cartCounter }}</span>
+  </button>
+</div>
+```
+
+__10.__ Para modificar la cantidad de productos pueden crear un componente contador (como el que hicimos en la primera entrega) que esté dentro del componente ProductCard. No es obligatorio hacerlo así, pero queda más claro para el usuario poder ver cuántos productos ya tiene agregados:
 
 ![vue-app](./images/vue-bakery.png)
 
-__10.__ Traten de repartir los componentes en subcarpetas (productos, carrito) para que el proyecto quede más organizado. Les paso la estructura que usé yo (no es necesario que lo hagan igual):
+__11.__ Traten de repartir los componentes en subcarpetas (productos, carrito) para que el proyecto quede más organizado. Les paso la estructura que usé yo (no es necesario que lo hagan igual):
 
 ```
 .
