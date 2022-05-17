@@ -140,8 +140,8 @@ updateCart(productId) {
         
   } else {
     // Si el producto no esta en el carrito, lo agrego.  
-    // Para no mutar propiedades del array de productos original
-    // busco el producto y lo guardo en un nuevo objeto:
+    // Uso el spread operator para hacer una copia del objeto original
+    // de lo contrario el objeto seguiría haciendo referencia al original y los cambios del nuevo objeto no tendrían efecto.
     const findProduct = this.products.find(product => product.id === productId);
     const newProduct = { ...findProduct };
   
