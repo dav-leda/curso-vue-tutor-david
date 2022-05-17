@@ -139,9 +139,9 @@ updateCart(productId) {
     productInCart.total = productInCart.quantity * productInCart.price;
         
   } else {
-    // Si el producto no esta en el carrito, lo agrego.  
-    // Uso el spread operator para hacer una copia del objeto original
-    // de lo contrario el objeto seguiría haciendo referencia al original y los cambios del nuevo objeto no tendrían efecto.
+    // Si el producto no esta en el carrito, lo pusheo. 
+    // Pero primero uso el spread operator {...} para hacer una copia del objeto original
+    // de lo contrario el objeto seguiría haciendo referencia al original y los cambios en el nuevo objeto no tendrían efecto.
     const findProduct = this.products.find(product => product.id === productId);
     const newProduct = { ...findProduct };
   
