@@ -79,8 +79,11 @@ const scriptRegExp = /<script[\s\S]*?>[\s\S]*?<\/script>/gi;
 // Para el formato de e-mail (es un chequeo mas completo que el que hace poniendo type="email" en el template):
 
 const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-
-
 ```
 
+Y luego para testearlas:
+
+```js
+this.alert.email = emailRegExp.test(this.form.email) ? '' : 'Formato de email inválido.';
+```
 <hr>
