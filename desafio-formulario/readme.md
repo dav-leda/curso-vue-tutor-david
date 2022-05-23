@@ -68,7 +68,7 @@ this.form.cursos = [];
 __7.__ Les paso algunas Regular Expressions que les pueden ser útiles:
 
 ```js
-// Para el nombre completo (minimo 2 palabras, minimo 2 caracteres cada una):
+// Para el nombre completo (mínimo 2 palabras, mínimo 2 caracteres cada una):
 
 const fullNameRegExp = /[a-zA-Z]{2,}\s+[a-zA-Z]{2,12}/g;
 
@@ -76,7 +76,7 @@ const fullNameRegExp = /[a-zA-Z]{2,}\s+[a-zA-Z]{2,12}/g;
 
 const scriptRegExp = /<script[\s\S]*?>[\s\S]*?<\/script>/gi;
 
-// Para el formato de e-mail (es un chequeo mas completo que el que hace poniendo type="email" en el template):
+// Para el formato de e-mail (es un chequeo más completo que el que se hace poniendo type="email" en el template):
 
 const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 ```
@@ -85,5 +85,38 @@ Y luego para testearlas:
 
 ```js
 this.alert.email = emailRegExp.test(this.form.email) ? '' : 'Formato de email inválido.';
+```
+
+__8.__ Para los mensajes de alerta, pueden declararlos primero en el objeto `data`:
+
+```js
+alert: {
+  nombre: '',
+  email: '',
+  edad: '',
+},
+```
+
+Y luego usarlos en el template, incluyendo los mensajes según el resultado de los métodos de validación:
+
+```html
+<label 
+  for="inputEmail" 
+  class="text-start mt-2"
+>E-mail:<span v-if="!alert.email && form.email">✅️</span>
+</label>
+
+<input 
+  type="email" 
+  class="form-control" 
+  name="inputEmail"
+  placeholder="mail@mail.com"
+  v-model="form.email"
+  @keyup="validateEmail"
+  required
+>
+<span v-if="alert.email" class="alert-danger">
+  {{alert.email}}
+</span>
 ```
 <hr>
