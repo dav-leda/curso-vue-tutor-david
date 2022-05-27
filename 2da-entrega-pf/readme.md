@@ -232,6 +232,8 @@ export default {
   // etc...
 }
 ```
+Para determinar qué usuario es Admin (`user.isAdmin`) recomiendo que lo hagan directamente modificando la propiedad `isAdmin` en el resource de usuarios de MockApi, no dándole esta opción al usuario en el formulario con un `checkbox`, sino cualuier usuario podría ser Admin.
+
 
 __9. Router:__ De la misma forma, pueden poner el componente de las cards (ProductCard.vue) dentro de la vista principal (HomeView.vue) y pasarle a HomeView el array de productos mediante `props`:
 
