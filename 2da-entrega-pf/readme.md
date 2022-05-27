@@ -355,7 +355,7 @@ if (userName) {
 }
 ```
 
-Luego deben enviar la data del formulario a MockApi y redireccionar al usuario a la vista de Login, o a la vista principal para que vaya de ahí al Login. En este caso no es necesario hacer un `emit` de con la data del usuario (en el caso del Login sí), sólo un POST a la API:
+Luego deben enviar la data del formulario a MockApi y redireccionar al usuario a la vista de Login, o a la vista principal para que vaya de ahí al Login. En este caso no es necesario hacer un `emit` con la data del usuario (en el caso del Login sí), sólo un POST a la API:
 
 ```js
 await apiServices.createUser(this.form);
