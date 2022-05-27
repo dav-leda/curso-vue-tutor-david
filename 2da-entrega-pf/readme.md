@@ -22,7 +22,7 @@ __2. MockApi:__ Primero deben crearse una cuenta en [MockApi](https://mockapi.io
 
 ![resources](./images/mockapi-create.png)
 
-Luego, en el resource de productos, en la sección `data`, agreguen un objeto JSON (o sea, con comillas en las keys) con sus productos.
+Luego, en el resource de productos, en la sección `data`, agreguen un array de objetos JSON (o sea, con comillas en las keys) con sus productos.
 
 __3. Vincular Resources:__ Este punto es opcional, ya que la consigna no es muy clara al respecto (solo dice "*Crear un último recurso que será el carrito, integrando GET y POST para realizar y revisar pedidos.*") pero les recomiendo que lo hagan de esta forma, ya que no tendría sentido mostrarle a cada usuario que usa la app los pedidos que hicieron todos los demás usuarios. Lo más lógico sería mostrarle al usuario que está loggeado los pedidos (o carritos) que tiene este usuario y no otros.
 
