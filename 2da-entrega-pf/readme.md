@@ -20,7 +20,7 @@ Si la información de Login estuviese alojada en el Frontend las web apps sería
 
 __2. MockApi:__ Primero deben crearse una cuenta en [MockApi](https://mockapi.io/). Luego de crear la cuenta deben crear 3 resources: uno para productos, otro para usuarios y otro para pedidos (o carritos). Los tres campos que dicen Faker.js bórrenlos y dejen solo el campo del id (es para que MockApi genere un id en forma automática cada vez que se agrega un nuevo item):
 
-![resources](./images/mockapi-create.png)
+<img src="./images/mockapi-create.png" width="400">
 
 Luego, en el resource de productos, en la sección `data`, agreguen un array de objetos JSON (o sea, con comillas en las keys) con sus productos.
 
@@ -34,7 +34,8 @@ En mi opinión no vale la pena complicarse con esto ya que en una app real no te
 
 Para vincular dos resources en MockApi deben arrastrar con el mouse el de orders al de users. Debería quedarles algo así:
 
-![relations2](./images/mockapi-relations2.png)
+<img src="./images/mockapi-relations2.png" width="400">
+
 
 Al vincular orders con users la URL para orders les va a quedar encapsulada dentro de users, y así pueden obtener los pedidos que hizo un usuario en particular:
 
@@ -363,7 +364,7 @@ this.$router.push('/');
 
 __14. AdminView:__ Para crear la vista de Admin pueden usar una tabla que muestre el listado de productos obtenidos de la API y botones para actualizar o eliminar cada producto:
 
-![admin view](./images/admin-view.png)
+<img src="./images/admin-view.png" width="350">
 
 Estos botones deberían disparar peticiones PUT (actualizar) o DELETE a la API, según el ID del producto:
 
@@ -381,7 +382,7 @@ Este cambio debería verse reflejado en el listado de productos de AdminView.
 
 __15. AdminView:__ Para agregar un nuevo producto pueden crear una nueva view con un formulario:
 
-![product form](./images/product-form.png)
+<img src="./images/product-form.png" width="300">
 
 El botón debería disparar una petición POST a la API con los datos del nuevo producto.
 
@@ -397,7 +398,7 @@ __17. ClientView:__ Este punto es opcional ya que la consigna no es muy clara al
 
 Si quieren mostrarle al usuario el listado de pedidos que realizó pueden hacerlo obteniéndolos de la API como en el punto 3 acá arriba (`getOrders`) y luego mostrándolos en una tabla ordenados por fecha:
 
-![pedidos](./images/vue-bakery-orders.png)
+<img src="./images/vue-bakery-orders.png" width="300">
 
 
 __18. Estructura del proyecto:__ Les recomiendo que ordenen las views y los componentes en distintas carpetas según corresponda. Esta es la estructura que usé yo (no es necesario que lo hagan igual):
