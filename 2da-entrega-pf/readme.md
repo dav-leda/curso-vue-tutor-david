@@ -98,7 +98,7 @@ Si quieren, en vez de un objeto pueden crear una `class` para los services. El u
 
 import axios from 'axios';
 
-const apiUrl = process.env.VUE_APP_API_URL + '/api';
+const apiUrl = process.env.VUE_APP_API_URL
 
 const apiServices = {
 
@@ -154,7 +154,7 @@ Sin embargo, les recomiendo que se acostumbren a usar variables de entorno porqu
 Para crear la variable de entorno deben crear un archivo `.env` en la raíz del proyecto (o sea, donde está `package.json`, no en `src`) y declarar la variable dentro de ese archivo:
 
 ```
-VUE_APP_API_URL=https://627db8bcb75a25d3f3aab8d1.mockapi.io
+VUE_APP_API_URL=https://627db8bcb75a25d3f3aab8d1.mockapi.io/api
 ```
 No olviden agregar `.env` a la lista de su `.gitignore` para que este archivo no se incluya en los commits a GH.
 
