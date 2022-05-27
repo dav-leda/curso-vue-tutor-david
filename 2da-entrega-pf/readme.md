@@ -147,7 +147,7 @@ methods: {
 __6. Variables Env:__ No es obligatorio que usen una variable de entorno (`VUE_APP_API_URL`) para guardar la URL de su cuenta de MockApi. Si quieren pueden ponerla directamente en una `const`:
 
 ```js
-const apiUrl = 'https://627db8bcb75a25d3f3aab8d1.mockapi.io' + '/api';
+const apiUrl = 'https://627db8bcb75a25d3f3aab8d1.mockapi.io/api';
 ```
 Sin embargo, les recomiendo que se acostumbren a usar variables de entorno porque es la práctica más usual para guardar la URL o la key de una API en Vue. Esto es para evitar que esta información quede expuesta al subir el repositorio a GitHub.
 
