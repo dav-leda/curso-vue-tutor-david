@@ -268,7 +268,7 @@ export default {
 ```
 Para determinar qué usuario es Admin (`user.isAdmin`) recomiendo que lo hagan directamente modificando la propiedad `isAdmin` en el resource de usuarios de MockApi, no dándole esta opción al usuario en el formulario con un `checkbox`, sino cualquier usuario podría ser Admin.
 
-__9. Router:__ La vista de Admin y la vista del cliente sólo deberían ser visibles para el Admin o el cliente. Si por ejemplo un usuario que no es Admin ingresa en su browser la URL de la vista de Admin esta no debería mostrarse, sino que debería redireccionar a la vista principal (HomeView):
+__9. Router:__ La vista de Admin y la vista del cliente sólo deberían ser visibles para el Admin o el cliente. Si por ejemplo un usuario que no es Admin ingresa en su browser la URL de la vista de Admin esta no debería mostrarse, sino que debería redireccionar a la vista principal (HomeView). Y lo mismo para la vista con los pedidos del cliente, si un usuario no loggeado intenta entrar a esa vista, debería ser redireccionado a HomeView:
 
 ```js
 import apiServices from '@/services/api.services';
