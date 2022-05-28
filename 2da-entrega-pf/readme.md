@@ -392,6 +392,7 @@ export default {
   // etc...
 }
 ```
+El objeto del usuario que envíen a App.vue con el emit (`this.$emit('logged-in', user);`) contiene el ID del usuario que luego les va a servir para obtener los pedidos del usuario por su ID.
 
 Tengan en cuenta que esta es una versión simplificada de un Login real. En una app real deberían generar una sesión de usuario, ya sea con [Cookies](https://medium.com/developer-rants/session-cookies-between-express-js-and-vue-js-with-axios-98a10274fae7) o con [JWT](https://blog.logrocket.com/how-to-implement-jwt-authentication-vue-nodejs/) y validar la Cookie (o el token) en cada petición HTTP.
 
