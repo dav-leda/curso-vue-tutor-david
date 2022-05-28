@@ -268,8 +268,41 @@ export default {
 ```
 Para determinar qué usuario es Admin (`user.isAdmin`) recomiendo que lo hagan directamente modificando la propiedad `isAdmin` en el resource de usuarios de MockApi, no dándole esta opción al usuario en el formulario con un `checkbox`, sino cualquier usuario podría ser Admin.
 
+__9. Router:__ La vista de Admin y la vista del cliente sólo deberían ser visibles para el Admin o el cliente. Si por ejemplo un usuario que no es Admin ingresa en su browser la URL de la vista de Admin esta no debería mostrarse, sino que debería redireccionar a la vista principal (HomeView):
 
-__9. Router:__ De la misma forma, pueden poner el componente de las cards (ProductCard.vue) dentro de la vista principal (HomeView.vue) y pasarle a HomeView el array de productos mediante `props`:
+```js
+import apiServices from '@/services/api.services';
+
+export default {
+  name: 'AdminView',
+  
+  data: () => ({
+    products: []
+  }),
+
+  props: {
+    user: {
+      type: Object
+    }
+  },
+
+  mounted() {
+    this.getProducts();
+  },
+  
+  methods: {
+
+    // Si no hay un usuario admin loggeado, volver a home
+    async getProducts() {
+      if (this.user) this.products = await apiServices.getProducts();
+      else this.$router.push('/')
+    }
+  }
+}
+```
+
+
+__10. Router:__ Al recibir el array de productos en `<router-view>` mediante props, pueden poner el componente de las cards (ProductCard.vue) dentro de la vista principal (HomeView.vue) y declarar esas `props` que van a recibir:
 
 ```js
 import ProductCard from '@/components/products/ProductCard.vue'
@@ -292,7 +325,7 @@ export default {
 }
 ```
 
-__10. Router:__ Para rutas dinámicas (es decir, las que generan una URL distinta según los `params` que se le pasen) deben usar el `<router-link>` de esta forma:
+__11. Router:__ Para rutas dinámicas (es decir, las que generan una URL distinta según los `params` que se le pasen) deben usar el `<router-link>` de esta forma:
 
 ```js
 <router-link 
@@ -328,7 +361,7 @@ export default {
 ```
 De esta forma pueden crear una `view` dinámica que cambie según la data que se le pasa por `props`.
 
-__11. Login:__ Para el Login pueden usar una ventana modal o una `view`, como prefieran. Pero recuerden que como aún no estamos usando Vuex deben hacer un `emit` con la data del usuario una vez que el Login fue realizado, para modificar el estado global de la app indicando que hay un usuario loggeado.
+__12. Login:__ Para el Login pueden usar una ventana modal o una `view`, como prefieran. Pero recuerden que como aún no estamos usando Vuex deben hacer un `emit` con la data del usuario una vez que el Login fue realizado, para modificar el estado global de la app indicando que hay un usuario loggeado.
 
 Para autenticar al usuario pueden usar nombre y password, o email y password, como prefieran (en mi caso usé nombre y password):
 
@@ -362,9 +395,9 @@ export default {
 
 Tengan en cuenta que esta es una versión simplificada de un Login real. En una app real deberían generar una sesión de usuario, ya sea con [Cookies](https://medium.com/developer-rants/session-cookies-between-express-js-and-vue-js-with-axios-98a10274fae7) o con [JWT](https://blog.logrocket.com/how-to-implement-jwt-authentication-vue-nodejs/) y validar la Cookie (o el token) en cada petición HTTP.
 
-__12. Login:__ Como esta app es un e-commerce no es conveniente que la vista de Login bloquee la vista principal (HomeView) como ocurriría en el caso de una red social o la app de un banco, en donde el usuario no puede ver nada si no hizo previamente un Login. En un e-commerce lo primero que el usuario debe ver son los productos, no un Login. El Login debería accederse mediante un botón en la NavBar. 
+__13. Login:__ Como esta app es un e-commerce no es conveniente que la vista de Login bloquee la vista principal (HomeView) como ocurriría en el caso de una red social o la app de un banco, en donde el usuario no puede ver nada si no hizo previamente un Login. En un e-commerce lo primero que el usuario debe ver son los productos, no un Login. El Login debería accederse mediante un botón en la NavBar. 
 
-__13. Signup:__ Para el Signup pueden usar una ventana modal o una `view`, como prefieran. En el formulario recuerden usar las validaciones que vimos en el entregable anterior:
+__14. Signup:__ Para el Signup pueden usar una ventana modal o una `view`, como prefieran. En el formulario recuerden usar las validaciones que vimos en el entregable anterior:
 
 ```js
 validateEmail() {
@@ -398,7 +431,7 @@ await apiServices.createUser(this.form);
 this.$router.push('/');
 ```
 
-__14. AdminView:__ Para crear la vista de Admin pueden usar una tabla que muestre el listado de productos obtenidos de la API y botones para actualizar o eliminar cada producto:
+__15. AdminView:__ Para crear la vista de Admin pueden usar una tabla que muestre el listado de productos obtenidos de la API y botones para actualizar o eliminar cada producto:
 
 <img src="./images/admin-view.png" width="350">
 
@@ -416,7 +449,7 @@ deleteProduct: async (productId) => {
 
 Este cambio debería verse reflejado en el listado de productos de AdminView.
 
-__15. AdminView:__ Para agregar un nuevo producto pueden crear una nueva view con un formulario:
+__16. AdminView:__ Para agregar un nuevo producto pueden crear una nueva view con un formulario:
 
 <img src="./images/product-form.png" width="300">
 
@@ -424,20 +457,20 @@ El botón debería disparar una petición POST a la API con los datos del nuevo 
 
 Para el formulario de actualización (PUT) pueden reutilizar el mismo componente y cambiar el texto en el botón ('Actualizar producto' en vez de 'Agregar producto') y el método que dispara el botón (`axios.put` en vez de `axios.post`).
 
-__16. Imágenes:__ Nuevamente les recomiendo que para las imágenes de productos usen un servidor de imágenes externo, de lo contrario no van a poder agregar imágenes usando el formulario.
+__17. Imágenes:__ Nuevamente les recomiendo que para las imágenes de productos usen un servidor de imágenes externo, de lo contrario no van a poder agregar imágenes usando el formulario.
 
 Aunque sería posible poner en el campo de la URL de la imagen el path de la carpeta `assets` (por ejemplo: `@/assets/images/imagen-producto.jpg`) eso es porque la app está en modo desarrollo, con un servidor local, y pueden agregar nuevas imágenes a esta carpeta fácilmente. Pero si la app está online no pueden hacer esto. Tendrían que agregar la imagen al repositorio, hacer un nuevo commit, luego un nuevo build y luego un nuevo deploy. Por eso recomiendo que suban las imágenes a Imgur.com y luego copien y peguen la URL de Imgur en el formulario. 
 
 Otra opción, mucho más compleja que Imgur pero muy utilizada en Vue, es usar [Cloudinary](https://cloudinary.com/documentation/vue_integration). Con Cloudinary no necesitan copiar y pegar la URL de la imagen en el formulario. Pueden subir directamente el archivo de la imagen desde la app de Vue y el archivo se guarda en el servidor de Cloudinary. Luego la API de Cloudinary retorna la URL de la imagen subida y esa URL se guarda en la base de datos que estén usando.
 
-__17. ClientView:__ Este punto es opcional ya que la consigna no es muy clara al respecto (solo dice: *listado de productos y carrito*).
+__18. ClientView:__ Este punto es opcional ya que la consigna no es muy clara al respecto (solo dice: *listado de productos y carrito*).
 
 Si quieren mostrarle al usuario el listado de pedidos que realizó pueden hacerlo obteniéndolos de la API como en el punto 3 acá arriba (`getOrders`) y luego mostrándolos en una tabla ordenados por fecha:
 
 <img src="./images/vue-bakery-orders.png" width="300">
 
 
-__18. Estructura del proyecto:__ Les recomiendo que ordenen las views y los componentes en distintas carpetas según corresponda. Esta es la estructura que usé yo (no es necesario que lo hagan igual):
+__19. Estructura del proyecto:__ Les recomiendo que ordenen las views y los componentes en distintas carpetas según corresponda. Esta es la estructura que usé yo (no es necesario que lo hagan igual):
 
 ```
 .
