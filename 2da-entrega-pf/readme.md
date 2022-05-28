@@ -158,7 +158,7 @@ VUE_APP_API_URL=https://627db8bcb75a25d3f3aab8d1.mockapi.io/api
 ```
 No olviden agregar `.env` a la lista de su `.gitignore` para que este archivo no se incluya en los commits a GH.
 
-__7. Router:__ Como todavía no estamos usando Vuex es conveniente que centralicen toda la data global en App.vue, y que los demás componentes accedan o modifiquen esta data mediante `props` y `emits`.
+__7. Router:__ Como todavía no estamos usando Vuex es conveniente que centralicen toda la data global (products, cart, user) en App.vue, y que los demás componentes accedan o modifiquen esta data mediante `props` y `emits`.
 
 Pero no es necesario que importen todos los componentes dentro de App.vue, pueden importar únicamente la NavBar y el resto de los componentes se va a renderizar dentro de `<router-view>` según la ruta a la que acceda el usuario:
 
@@ -181,6 +181,40 @@ Pero no es necesario que importen todos los componentes dentro de App.vue, puede
 
   </div>
 </template>
+
+<script>
+
+import apiServices from '@/services/api.services';
+import NavBar from '@/components/NavBar.vue'
+
+export default {
+  name: 'App',
+
+  components: {
+    NavBar
+  },
+
+  data: () => ({
+    products: [],
+    cart: [],
+    user: null
+  }),
+
+  mounted() {
+    this.getProducts();
+    this.getCart();
+  },
+
+  methods: {
+    async getProducts() {
+      this.products = await apiServices.getProducts();
+    },
+    getCart() {
+      this.cart = JSON.parse(localStorage.getItem('cart')) || [];
+    }, 
+    // etc...
+  }
+}
 
 ```
 __8. Router:__ Para que las `views` puedan recibir `props` a través de `<router-view>` deben setearlas en `true` en el archivo del router. Si el componente tiene declaradas esas `props`, las va a tomar, y si no las tiene declaradas, no hace nada.
