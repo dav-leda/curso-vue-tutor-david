@@ -42,8 +42,8 @@ Al vincular orders con users la URL para orders les va a quedar encapsulada dent
 ```js
 getOrders: async (userId) => {
   try {
-    const res = await axios.get(`${apiUrl}/users/${userId}/orders`);
-    return res.data;
+    const { data } = await axios.get(`${apiUrl}/users/${userId}/orders`);
+    return data;
   
   } catch (err) { console.log (err) }
 }
@@ -104,16 +104,16 @@ const apiServices = {
 
   getProducts: async () => {
     try {
-      const res = await axios.get(apiUrl + '/products');
-      return res.data;
+      const { data } = await axios.get(apiUrl + '/products');
+      return data;
     
     } catch (err) { console.log (err) }
   },
 
   saveProduct: async (product) => {
     try {
-      const res = await axios.post(apiUrl + '/products', product);
-      return res.data;
+      const { data } = await axios.post(apiUrl + '/products', product);
+      return data;
 
     } catch (err) { console.log (err) }
   },
