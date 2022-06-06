@@ -277,10 +277,10 @@ export default {
 
   computed: {
 
-    ...mapGetters(['productById']),
+    ...mapGetters(['getProductById']),
 
     product () {
-      return this.productById(this.productId)
+      return this.getProductById(this.productId)
     },
     // etc...
   },
@@ -294,23 +294,40 @@ getters: {
 
   products: state => state.products,
 
-  productById: state => id => {
+  getProductById: state => id => {
     return state.products.find(product => product.id == id)
   }   
 },
 ```
 
-Y una tercera opción es realizar una petición a la API en ProductView para obtener el producto por su ID:
+Y una tercera opción es realizar una petición a la API en ProductView para obtener el producto por su ID en caso de que el getter de Vuex no devuelva nada (porque el store de productos quedó vacío al recargar la página):
 
 ```js
 created () {
   this.getProduct()
 },
 
+data () {
+  return {
+    productId: this.$route.params.id
+  }
+},
+
+computed:
+  // getter de Vuex para obtener el producto por su ID
+  ...mapGetters(['getProductById']),
+},
+
 methods: {
 
   async getProduct() {
-    this.product = await apiServices.getProductById(this.productId)
+    // Primero intentar obtener el producto con el getter de Vuex:
+    this.product = this.getProductById(this.productId)
+    // Si esto falla (porque el store de productos fue vaciado al recargar la página)
+    // obtener el producto de la API:
+    if (!this.product) {
+      this.product = await apiServices.getProductById(this.productId)
+    }
   },
   // etc...
 }
