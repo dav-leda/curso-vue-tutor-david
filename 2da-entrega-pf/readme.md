@@ -183,7 +183,8 @@ Pero no es necesario que importen todos los componentes dentro de App.vue, puede
 </template>
 
 <script>
-
+```
+```js
 import apiServices from '@/services/api.services';
 import NavBar from '@/components/NavBar.vue'
 
