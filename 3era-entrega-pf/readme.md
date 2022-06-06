@@ -212,7 +212,7 @@ De todas formas, tengan en cuenta que __en una app real los datos del usuario nu
 
 Pero incluso esta opción no es del todo segura ya que `localStorage` puede ser hackeado y el token podría ser robado. La opción más segura (aunque más complicada de implementar que JWT, sobre todo cuando Front y Back no comparten el mismo dominio) es usar [Cookies](https://medium.com/developer-rants/session-cookies-between-express-js-and-vue-js-with-axios-98a10274fae7) del tipo [HTTP only](https://geekflare.com/es/enable-cors-httponly-cookie-secure-token/).
 
-__7. Mutations:__ Por convención el nombre de las mutations se pone mayúsculas, pero no es obligatorio hacerlo así (de hecho, en la documentación oficial de Vuex no usan mayúsculas para las mutations):
+__7. Mutations:__ Por convención el nombre de las mutations se pone en mayúsculas, pero no es obligatorio hacerlo así (de hecho, en la documentación oficial de Vuex no usan mayúsculas para las mutations):
 
 ```js
 EMPTY_CART: (state) => {
