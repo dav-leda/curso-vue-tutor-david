@@ -381,7 +381,7 @@ Para el link a la vista de Agregar, en vez de pasarle el `id` del producto (que 
 ```
 
 
-__12. UpdateView:__ Otra opción: en lugar de pasarle por `params` los datos del producto a la vista de Update se puede pasarle por `params` únicamente el `id` del producto y luego obtener los datos del producto directamente de la API por el `id` de la ruta (`this.$route.params.id`):
+__12. UpdateView:__ Otra opción es que en lugar de pasarle por `params` los datos del producto a la vista de Update se le puede pasar por `params` únicamente el `id` del producto y luego obtener los datos del producto directamente de la API según el `id` de la ruta (`this.$route.params.id`):
 
 ```js
 import apiServices from '@/services/api.services';
@@ -420,6 +420,25 @@ export default {
 }
 ```
 
+Y en `apiServices` crear un método para obtener de la API el producto por su `id`:
+
+```js
+getProductById: async (id) => {
+  try {
+    const { data } = await axios.get(`${apiUrl}/products/${id}`);
+    return data
+    
+  } catch (err) { console.log (err) }
+},
+```
+
+Lo bueno de esta opción es que si el usuario recarga la página los datos del producto se mantienen, porque vuelven a obtenerse de la API. 
+
+Lo malo es que la llamada a la API puede demorarse, lo cual puede dar un error al intentar renderizar el template cuando los datos del producto aún no están disponibles. Para evitar este error se puede poner un `v-if` al comienzo del template:
+
+```html
+<div v-if="product" class="container mt-5">
+```
 
 __13. Login:__ Para el Login pueden usar una ventana modal o una `view`, como prefieran. Pero recuerden que como aún no estamos usando Vuex deben hacer un `emit` con la data del usuario una vez que el Login fue realizado, para modificar el estado global de la app indicando que hay un usuario loggeado.
 
