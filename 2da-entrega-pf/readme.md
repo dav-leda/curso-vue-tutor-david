@@ -326,7 +326,7 @@ export default {
 }
 ```
 
-__11. Router:__ Para rutas dinámicas (es decir, las que generan una URL distinta según los `params` que se le pasen) deben usar el `<router-link>` de esta forma:
+__11. Rutas Dinámicas:__ Para las rutas dinámicas (es decir, las que generan una URL distinta según los `params` que se le pasen) deben usar `<router-link>` de esta forma:
 
 ```js
 <router-link 
@@ -340,7 +340,7 @@ __11. Router:__ Para rutas dinámicas (es decir, las que generan una URL distint
   class="btn btn-success"
 >Actualizar</router-link>
 ```
-El primer `param` que recibe (en este caso el `id`) es el que determina el nombre de la URL. Por ejemplo, `http://localhost:8080/admin/update/1` en donde 1 es el id del producto que se le pasó por `param`. 
+El primer `param` (en este caso el `id`) es el que determina el nombre de la URL. Por ejemplo, `http://localhost:8080/admin/update/1` en donde 1 es el `id` del producto que se le pasó por `param`. 
 
 El segundo param (`product`) son los datos del producto, que luego pueden ser renderizados en el formulario para Actualizar (Update) y así no tener que volver a cargar en el formulario dato por dato cuando solo queremos actualizar un único dato del producto (el stock, por ejemplo). 
 
@@ -381,7 +381,7 @@ Para el link a la vista de Agregar, en vez de pasarle el `id` del producto (que 
 ```
 
 
-__12. UpdateView:__ Otra opción: en lugar de pasarle por `params` los datos del producto a la vista de Update se puede pasarle por `params` únicamente el ID del producto y luego obtener los datos del producto directamente de la API por el ID de la ruta (`this.$route.params.id`):
+__12. UpdateView:__ Otra opción: en lugar de pasarle por `params` los datos del producto a la vista de Update se puede pasarle por `params` únicamente el `id` del producto y luego obtener los datos del producto directamente de la API por el `id` de la ruta (`this.$route.params.id`):
 
 ```js
 import apiServices from '@/services/api.services';
