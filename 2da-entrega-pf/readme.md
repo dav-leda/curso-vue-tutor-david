@@ -341,7 +341,7 @@ __11. Router:__ Para rutas dinámicas (es decir, las que generan una URL distint
 ```
 El primer `param` que recibe (en este caso el `id`) es el que determina el nombre de la URL. Por ejemplo, `http://localhost:8080/admin/update/1` en donde 1 es el id del producto que se le pasó por `param`. 
 
-El segundo param (`product`) son los datos del producto, que luego pueden ser renderizados en el formulario para Actualizar (Update) y así no tener que volver a cargar en el formulario dato por dato cuando solo queremos actualizar uno (el stock, por ejemplo). 
+El segundo param (`product`) son los datos del producto, que luego pueden ser renderizados en el formulario para Actualizar (Update) y así no tener que volver a cargar en el formulario dato por dato cuando solo queremos actualizar un único dato del producto (el stock, por ejemplo). 
 
 Luego en la view (UpdateProduct) reciben esos dos `params` como `props`:
 
