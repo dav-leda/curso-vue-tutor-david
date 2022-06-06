@@ -341,7 +341,9 @@ __11. Router:__ Para rutas dinámicas (es decir, las que generan una URL distint
 ```
 El primer `param` que recibe (en este caso el `id`) es el que determina el nombre de la URL. Por ejemplo, `http://localhost:8080/admin/update/1` en donde 1 es el id del producto que se le pasó por `param`. 
 
-Y luego declaran ambas props en el componente:
+El segundo param (`product`) son los datos del producto, que luego pueden ser renderizados en el formulario para Actualizar (Update) y así no tener que volver a cargar en el formulario dato por dato cuando solo queremos actualizar uno (el stock, por ejemplo). 
+
+Luego en la view (UpdateProduct) reciben esos dos `params` como `props`:
 
 ```js
 export default {
@@ -359,7 +361,23 @@ export default {
   // etc...
 }
 ```
-De esta forma pueden crear una `view` dinámica que cambie según la data que se le pasa por `props`.
+
+Para la vista de Agregar Producto pueden reutilizar la vista de Actualizar o crear otra vista aparte.
+
+Para el link a la vista de Agregar, en vez de pasarle el `id` del producto (que aún no tienen porque es un producto que aún no fue cargado en la lista) le pueden pasar como primer `param` directamente el nombre de la ruta, por ejemplo, `agregar` o `add-product`, y como segundo `param` un objeto vacío (`product: {}`), ya que al agregar un nuevo producto deben cargar todos los campos del formulario de cero:
+
+```js
+<router-link
+  :to="{
+    name: 'update',
+    params: {
+      id: 'agregar',
+      product: {}
+    }
+  }" 
+  class="btn btn-primary"
+>+ Agregar Producto</router-link>
+```
 
 __12. Login:__ Para el Login pueden usar una ventana modal o una `view`, como prefieran. Pero recuerden que como aún no estamos usando Vuex deben hacer un `emit` con la data del usuario una vez que el Login fue realizado, para modificar el estado global de la app indicando que hay un usuario loggeado.
 
