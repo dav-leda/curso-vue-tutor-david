@@ -125,7 +125,8 @@ import { useStore } from 'vuex'
 const store = useStore();
 
 // Llamada a la action de Vuex
-// No es necesario onMounted() porque setup se ejectuta "on created"
+// No es necesario onMounted() porque setup se ejecuta al crearse el componente
+// lo que equivale a created() de Vue 2:
 store.dispatch('getUsers')
 
 // Llamada al getter de Vuex, deben usar computed para accederlos:
