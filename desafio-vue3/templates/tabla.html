@@ -1,0 +1,24 @@
+<template>
+  <div class="container">
+
+    <table class="table table-dark table-striped table-bordered">
+
+      <thead>
+        <tr>
+          <th v-for="(title, i) in titles" :key="i">{{ title }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr v-for="user in users" :key="user.id">
+          <td>{{ user.nombre }}</td>
+          <td>{{ user.apellido }}</td>
+          <td>{{ user.edad }}</td>
+          <td>{{ user.email }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+</template>

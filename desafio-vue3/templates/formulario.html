@@ -1,0 +1,71 @@
+<template>
+
+  <form @submit.prevent="submitForm">
+
+    <label for="nombre">Nombre:</label>
+    <div>
+      <input
+        name="nombre" 
+        type="text"
+        v-model="v$.user.nombre.$model" 
+      />
+      <small
+        class="d-block error"
+      >{{ v$.user.nombre.$errors[0]?.$message }}</small>
+    </div>
+
+    <br>
+
+    <label for="apellido">Apellido:</label>
+    <div>
+      <input
+        name="apellido" 
+        type="text"
+        v-model="v$.user.apellido.$model" 
+      />
+      <small
+        class="d-block error"
+      >{{ v$.user.apellido.$errors[0]?.$message }}</small>
+    </div>
+
+    <br>
+
+    <label for="edad">Edad:</label>
+    <div>
+      <input
+        name="edad" 
+        type="text"
+        v-model="v$.user.edad.$model" 
+      />
+      <small
+        class="d-block error"
+      >{{ v$.user.edad.$errors[0]?.$message }}</small>
+    </div>
+
+    <br>
+
+    <label for="email">E-mail:</label>
+    <div>
+      <input
+        name="email" 
+        type="text"
+        v-model="v$.user.email.$model" 
+      />
+      <small
+        class="d-block error"
+      >{{ v$.user.email.$errors[0]?.$message }}</small>
+    </div>
+
+    <br>
+
+    <button class="btn btn-primary mt-2" type="submit">Enviar</button>
+
+  </form>
+
+</template>
+
+<style>
+
+  .error { color: red; }
+
+</style>
