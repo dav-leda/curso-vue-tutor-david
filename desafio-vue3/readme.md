@@ -76,7 +76,7 @@ const submitForm = async () => {
 </script>
 ```
 
-Y luego recibir el evento en el componente padre, pusheando el nuevo  `user` dentro de un array reactivo (`users`). Al hacer el push recuerden usar el spread operator para clonar el objeto y desvincularlo del objeto reactivo `state`, de lo contrario al resetear el formulario el objeto `user` va a quedar vacío, porque reaccion a los cambios del objeto `state`.
+Y luego recibir el evento en el componente padre, pusheando el nuevo  `user` dentro de un array reactivo (`users`). Al hacer el push recuerden usar el spread operator para clonar el objeto y desvincularlo del objeto reactivo `state`, de lo contrario al resetear el formulario el objeto `user` va a quedar vacío, porque reacciona a los cambios del objeto `state`.
 
 ```js
 <script setup>
