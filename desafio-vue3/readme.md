@@ -91,14 +91,33 @@ const submit = user => users.push({ ...user });
 
 </script>
 ```
+__5. v-model:__ Dentro del formulario tienen dos formas de enlazar los datos del objeto reactivo `state` con los inputs: 
 
-__5. Variables:__ En Vue 3 no es necesario declarar todas las variables como reactivas (como en el objeto `data` de Vue 2). Las variables que no cambian (por ejemplo, el array de títulos de la tabla) pueden ser declaradas como en JavaScript nativo:
+```html
+<input
+  name="nombre" 
+  type="text"
+  v-model="state.user.nombre"
+/>
+```
+O usando el método `$model` de Vuelidate (sin `state`):
+
+```html
+<input
+  name="nombre" 
+  type="text"
+  v-model="v$.user.nombre.$model"
+/>
+```
+Recomiendo que usen esta última, así los mensajes de error aparecen a medida que el usuario escribe (y no recién cuando cliquea en el botón de Enviar).
+
+__6. Variables:__ En Vue 3 no es necesario declarar todas las variables como reactivas (como en el objeto `data` de Vue 2). Las variables que no cambian (por ejemplo, el array de títulos de la tabla) pueden ser declaradas como en JavaScript nativo:
 
 ```js
 const titles = ['Nombre', 'Apellido', 'Edad', 'Email'];
 ```
 
-__6. Vuex 4:__ Si optan por usar el del formulario con Vuex, recuerden que en Vuex 4 la store se declara de una forma distinta. Deben importar el método `createStore`:
+__7. Vuex 4:__ Si optan por usar el del formulario con Vuex, recuerden que en Vuex 4 la store se declara de una forma distinta. Deben importar el método `createStore`:
 
 ```js
 import { createStore } from 'vuex'
@@ -111,7 +130,7 @@ const store = createStore({
 
 export default store
 ```
-__7. Vuex 4:__ Para acceder a los `getters` y `actions` de Vuex 4 en los componentes ya no es posible usar los métodos `mapGetters` y `mapActions` de Vuex 3. Deben hacerlo de esta forma:
+__8. Vuex 4:__ Para acceder a los `getters` y `actions` de Vuex 4 en los componentes ya no es posible usar los métodos `mapGetters` y `mapActions` de Vuex 3. Deben hacerlo de esta forma:
 
 ```js
 <script setup>
