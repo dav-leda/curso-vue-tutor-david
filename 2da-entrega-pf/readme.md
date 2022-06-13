@@ -18,6 +18,8 @@ Pero una vez que la app está online las instancias del Frontend son múltiples,
 
 Si la información de Login estuviese alojada en el Frontend las web apps serían fácilmente hackeables. Por esa razón, la autenticación de usuarios sólo es posible usando un Backend (o un [BaaS](https://es.wikipedia.org/wiki/Backend_as_a_service) como [Firebase](https://firebase.google.com/)).
 
+En el caso de Mockapi no es posible chequear la data de Login en el Backend, debemos hacerlo en el Frontend. Pero tengan en cuenta que al hacer la petición a Mockapi de la list completa de usuarios (para luego chequear si los datos ingresados coinciden con los de algún usuario registrado) __están exponiendo los datos de todos los usuarios de la app en la sección Network del navegor.__ En una app real esto no se haría así.
+
 __2. MockApi:__ Primero deben crearse una cuenta en [MockApi](https://mockapi.io/). Luego de crear la cuenta deben crear 3 resources: uno para productos, otro para usuarios y otro para pedidos (o carritos). Los tres campos que dicen Faker.js bórrenlos y dejen solo el campo del id (es para que MockApi genere un id en forma automática cada vez que se agrega un nuevo item):
 
 <img src="./images/mockapi-create.png" width="400">
@@ -473,7 +475,9 @@ export default {
 ```
 El objeto del usuario que envíen a App.vue con el emit (`this.$emit('logged-in', user);`) contiene el ID del usuario que luego les va a servir para obtener los pedidos del usuario por su ID.
 
-Tengan en cuenta que esta es una versión simplificada de un Login real. En una app real deberían generar una sesión de usuario, ya sea con [Cookies](https://medium.com/developer-rants/session-cookies-between-express-js-and-vue-js-with-axios-98a10274fae7) o con [JWT](https://blog.logrocket.com/how-to-implement-jwt-authentication-vue-nodejs/) y validar la Cookie (o el token) en cada petición HTTP.
+Tengan en cuenta que esta es una versión simplificada de un Login real. En una app real el chequeo de los datos del usuario debe ocurrir en el Backend, no en el Frontend. Al hacerlo en el Frontend están exponiendo los datos de todos los usuarios de la app porque `apiServices.getUsers()` obtiene la lista completa de usuarios, y esta lista queda visible en la sección Network del navegador.
+
+En una app real deberían enviar al Backend los datos del usuario y luego generar una sesión de usuario, ya sea con [Cookies](https://medium.com/developer-rants/session-cookies-between-express-js-and-vue-js-with-axios-98a10274fae7) o con [JWT](https://blog.logrocket.com/how-to-implement-jwt-authentication-vue-nodejs/) y validar la Cookie (o el token) en cada petición HTTP.
 
 __14. Login:__ Como esta app es un e-commerce no es conveniente que la vista de Login bloquee la vista principal (HomeView) como ocurriría en el caso de una red social o la app de un banco, en donde el usuario no puede ver nada si no hizo previamente un Login. En un e-commerce lo primero que el usuario debe ver son los productos, no un Login. El Login debería accederse mediante un botón en la NavBar. 
 
