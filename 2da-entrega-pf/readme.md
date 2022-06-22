@@ -18,7 +18,7 @@ Pero una vez que la app está online las instancias del Frontend son múltiples,
 
 Si la información de Login estuviese alojada en el Frontend las web apps serían fácilmente hackeables. Por esa razón, la autenticación de usuarios sólo es posible usando un Backend (o un [BaaS](https://es.wikipedia.org/wiki/Backend_as_a_service) como [Firebase](https://firebase.google.com/)).
 
-En el caso de Mockapi no es posible chequear la data de Login en el Backend, debemos hacerlo en el Frontend. Pero tengan en cuenta que al hacer la petición a Mockapi de la list completa de usuarios (para luego chequear si los datos ingresados coinciden con los de algún usuario registrado) __están exponiendo los datos de todos los usuarios de la app en la sección Network del navegor.__ En una app real esto no se haría así.
+En el caso de Mockapi no es posible chequear la data de Login en el Backend, debemos hacerlo en el Frontend. Pero tengan en cuenta que al hacer la petición a Mockapi de la lista completa de usuarios (para luego chequear si los datos ingresados coinciden con los de algún usuario registrado) __están exponiendo los datos de todos los usuarios de la app en la sección Network del navegador.__ En una app real esto no se haría así.
 
 __2. MockApi:__ Primero deben crearse una cuenta en [MockApi](https://mockapi.io/). Luego de crear la cuenta deben crear 3 resources: uno para productos, otro para usuarios y otro para pedidos (o carritos). Los tres campos que dicen Faker.js bórrenlos y dejen solo el campo del id (es para que MockApi genere un id en forma automática cada vez que se agrega un nuevo item):
 
@@ -106,16 +106,16 @@ const apiServices = {
 
   getProducts: async () => {
     try {
-      const { data } = await axios.get(apiUrl + '/products');
-      return data;
+      const { data } = await axios.get(`${apiUrl}/products`);
+      return data
     
     } catch (err) { console.log (err) }
   },
 
   saveProduct: async (product) => {
     try {
-      const { data } = await axios.post(apiUrl + '/products', product);
-      return data;
+      const { data } = await axios.post(`${apiUrl}/products`, product);
+      return data
 
     } catch (err) { console.log (err) }
   },
