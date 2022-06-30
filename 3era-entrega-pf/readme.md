@@ -309,6 +309,7 @@ created () {
 
 data () {
   return {
+    product: null,
     productId: this.$route.params.id
   }
 },
