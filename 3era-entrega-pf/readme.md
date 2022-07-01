@@ -230,7 +230,9 @@ Lo que nunca deben hacer es modificar el `state` en forma directa desde un compo
 
 __9.__ Este último punto es opcional: sería bueno que además de mostrar la información de los productos en una serie de cards dentro de HomeView, al cliquear en una card el usuario sea dirigido a una `view` (ProductView) donde vea el producto en detalle (en la mayoría de los e-commerce es así). 
 
-Para hacer esto tienen 3 opciones: pasarle los datos del producto desde la card a la `view` en los `params` de `<router-link>` y en ProductView declarar esto en las `props`:
+Para hacer esto tienen 3 opciones: 
+
+__Opción 1:__ Pasarle los datos del producto desde la card a la `view` en los `params` de `<router-link>` y en ProductView declarar esto en las `props`:
 
 ```html
 <router-link 
@@ -263,7 +265,7 @@ export default {
 }
 ```
 
-Otra opción es usar en ProductView un `getter` de Vuex al que se le pase por parámetro el `id` del producto que es generado en la ruta dinámica (`this.$route.params.id`):
+__Opción 2:__ Pueden usar un `getter` de Vuex al que se le pase por parámetro el `id` del producto que es generado en la ruta dinámica (`this.$route.params.id`):
 
 ```js
 export default {
@@ -300,7 +302,7 @@ getters: {
 },
 ```
 
-Y una tercera opción es realizar una petición a la API en ProductView para obtener el producto por su ID en caso de que el getter de Vuex no devuelva nada (porque el store de productos quedó vacío al recargar la página):
+__Opción 3:__ Realizar una petición a la API en ProductView para obtener el producto por su ID en caso de que el getter de Vuex no devuelva nada (porque el store de productos quedó vacío al recargar la página):
 
 ```js
 created () {
