@@ -147,7 +147,7 @@ __5. Mutations:__ Ya que Vuex maneja el estado del carrito, toda la lógica de a
 ```js
 ADD_TO_CART: (state, { product, counter }) => {
 
-  const inCart = state.cart.find(prod => prod.id == product.id)
+  const inCart = state.cart.find(prod => prod.id === product.id)
   
   if (inCart) {
     inCart.qty = counter;
@@ -295,7 +295,7 @@ getters: {
   products: state => state.products,
 
   getProductById: state => id => {
-    return state.products.find(product => product.id == id)
+    return state.products.find(product => product.id === id)
   }   
 },
 ```
